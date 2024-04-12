@@ -1,0 +1,31 @@
+#Dockerfile for prod environment
+
+#Setting the base image as node and setting the alias as build
+FROM node:14-alpine as build
+
+#Setting the working directory
+WORKDIR /app
+
+#Copying the package.json before my source code files
+COPY package.json .
+
+#Installing the necessary dependencies
+RUN npm install
+
+#Copying the remaining files from the current working directory
+COPY . .
+
+#running the command for build stage
+RUN npm run build
+
+#Setting final image for my container as nginx
+FROM nginx:stable-alpine
+
+#Copying the files which are created while building stage to html folder
+COPY --from=build /app/build /usr/share/nginx/html
+
+#Exposing the port 80 as my application listens on port 80
+EXPOSE 80
+
+#Starting Nginx server with daemon mode off
+CMD ["nginx", "-g", "daemon off;"]
