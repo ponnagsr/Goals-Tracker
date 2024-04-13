@@ -1,0 +1,4 @@
+#These files will be ignored while copying the files in the process of building the docker image
+node_modules
+.git
+Dockerfile
