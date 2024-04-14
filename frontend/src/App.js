@@ -7,7 +7,7 @@ import ErrorAlert from './components/UI/ErrorAlert';
 const backendUrl =
   process.env.NODE_ENV === 'development'
     ? 'http://localhost'
-    : 'http://ecs-lb-783189166.us-east-2.elb.amazonaws.com';
+    : 'http://ecs-lb-******.us-east-2.elb.amazonaws.com';
 
 function App() {
   const [loadedGoals, setLoadedGoals] = useState([]);
